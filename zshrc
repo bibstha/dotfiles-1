@@ -20,33 +20,28 @@ for function in ~/.zsh/functions/*; do
   source $function
 done
 
-# makes color constants available
-autoload -U colors
-colors
+ZSH_THEME="steeef"
+alias j='fasd_cd -i'
 
-# enable colored output from ls, etc
-export CLICOLOR=1
+plugins=(git fasd docker brew gem jsontools osx git-extras)
+source $ZSH/oh-my-zsh.sh
 
-# history settings
-setopt hist_ignore_all_dups inc_append_history
-HISTFILE=~/.zhistory
-HISTSIZE=4096
-SAVEHIST=4096
+# User configuration
 
-# awesome cd movements from zshkit
-setopt autocd autopushd pushdminus pushdsilent pushdtohome cdablevars
-DIRSTACKSIZE=5
+export PATH=$(brew --prefix coreutils)/libexec/gnubin:"/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/texlive/2014/bin/x86_64-darwin:./vendor/bin"
 
-# Enable extended globbing
-setopt extendedglob
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
-# Allow [ or ] whereever you want
-unsetopt nomatch
+export EDITOR='vim'
+export DOCKER_HOST=tcp://192.168.59.103:2376
+export DOCKER_CERT_PATH=/Users/bis/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
 
-# vi mode
-bindkey -v
-bindkey "^F" vi-cmd-mode
-bindkey jj vi-cmd-mode
+# Setup zsh-autosuggestions
+source /Users/bibek/.zsh-autosuggestions/autosuggestions.zsh
 
 # handy keybindings
 bindkey "^A" beginning-of-line
@@ -61,41 +56,10 @@ bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
-# extra files in ~/.zsh/configs/pre , ~/.zsh/configs , and ~/.zsh/configs/post
-# these are loaded first, second, and third, respectively.
-_load_settings() {
-  _dir="$1"
-  if [ -d "$_dir" ]; then
-    if [ -d "$_dir/pre" ]; then
-      for config in "$_dir"/pre/**/*(N-.); do
-        . $config
-      done
-    fi
+zle -N zle-line-init
 
-    for config in "$_dir"/**/*(N-.); do
-      case "$config" in
-        "$_dir"/pre/*)
-          :
-          ;;
-        "$_dir"/post/*)
-          :
-          ;;
-        *)
-          if [ -f $config ]; then
-            . $config
-          fi
-          ;;
-      esac
-    done
+# use ctrl+t to toggle autosuggestions(hopefully this wont be needed as
+# zsh-autosuggestions is designed to be unobtrusive)
+bindkey '^T' autosuggest-toggle
 
-    if [ -d "$_dir/post" ]; then
-      for config in "$_dir"/post/**/*(N-.); do
-        . $config
-      done
-    fi
-  fi
-}
-_load_settings "$HOME/.zsh/configs"
 
-# Local config
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

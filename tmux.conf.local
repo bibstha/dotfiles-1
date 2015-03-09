@@ -1,0 +1,7 @@
+bind -n F5 previous-window
+bind -n F6 next-window
+
+# Enable mouse support in ~/.tmux.conf
+set-option -g mouse-select-pane on
+set-option -g mouse-select-window on
+set-window-option -g mode-mouse on
