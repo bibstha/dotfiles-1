@@ -1,3 +1,7 @@
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+
 bind-key -n F2 new-window \; rename-window ""
 bind-key -n F3 display-panes \; split-window -h
 bind-key -n F4 display-panes \; split-window -v
