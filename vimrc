@@ -1,3 +1,5 @@
+set shell=/bin/bash
+
 " Leader
 let mapleader = " "
 
@@ -48,7 +50,7 @@ augroup vimrcEx
   autocmd FileType markdown setlocal spell
 
   " Automatically wrap at 80 characters for Markdown
-  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+  autocmd BufRead,BufNewFile *.md setlocal textwidth=120
 
   " Automatically wrap at 72 characters and spell check git commit messages
   autocmd FileType gitcommit setlocal textwidth=72
@@ -80,7 +82,7 @@ if executable('ag')
 endif
 
 " Make it obvious where 80 characters is
-set textwidth=80
+set textwidth=120
 set colorcolumn=+1
 
 " Numbers
