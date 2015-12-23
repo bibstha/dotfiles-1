@@ -1,2 +1,7 @@
 Plug 'altercation/vim-colors-solarized'
+Plug 'christoomey/vim-tmux-navigator'
+
+" Plug 'christoomey/vim-tmux-runner'
+Plug 'tpope/vim-vinegar'
+Plug 'scrooloose/nerdtree'
 
