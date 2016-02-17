@@ -16,3 +16,6 @@ noremap <leader>ss :call StripWhitespace()<CR>
 
 " Easy access to file folder
 cabbr <expr> %% expand('%:p:h')
+
+" map <C-n> :NERDTreeToggle<CR>
+let $PATH = "./bin:" . $PATH
